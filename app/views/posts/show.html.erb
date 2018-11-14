@@ -3,3 +3,25 @@
 <hr>
 <%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-warning' %>
 <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, :class => 'btn btn-danger' %>
+<hr>
+<h2>All Comments</h2>
+<% @post.comments.each do |comment| %>
+  <div class="alert alert-light">
+    <p><strong><%= comment.username %></strong>: <%= comment.body %></p>
+  </div>
+<% end %>
+<hr>
+<h2>Add a comment</h2>
+<%= form_for [@post, @post.comments.build] do |f| %>
+  <p>
+    User<br>
+    <%= f.text_field :username, :class => "form-control"%>
+  </p>
+  <p>
+    Comment Text<br>
+    <%= f.text_area :body, :class => "form-control" %>
+  </p>
+  <p>
+    <%= f.submit "Add a comment", :class => "btn btn-warning" %>
+  </p>
+<% end %>
