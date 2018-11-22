@@ -1,5 +1,6 @@
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<%= image_tag  @post.image.url(:large), class: 'img-show' if @post.image? %>
+<p><%= @post.body.html_safe %></p>
 <% if user_signed_in? %>
   <hr>
   <%= link_to "Edit", edit_post_path(@post), :class => 'btn btn-warning' %>

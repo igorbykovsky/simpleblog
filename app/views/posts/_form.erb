@@ -1,16 +1,19 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, html: { multipart: true } do |f| %>
   <% if @post.errors.any? %>
     <% @post.errors.full_messages.each do |msg| %>
       <div class="alert alert-danger"><%= msg %></div>
     <% end %>
   <% end %>
   <p>
-    Name<br>
+    <%= f.label :title %>
     <%= f.text_field :title, :class => "form-control"%>
   </p>
   <p>
     Post Text<br>
-    <%= f.text_area :body, :class => "form-control" %>
+    <%= f.trix_editor :body, :class => "editor" %>
+  </p>
+  <p>
+    <%= f.file_field :image %>
   </p>
   <p>
     <%= f.submit :class => "btn btn-success" %>
