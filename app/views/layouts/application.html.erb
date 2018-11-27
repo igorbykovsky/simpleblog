@@ -13,8 +13,10 @@
   <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <h5 class="my-0 mr-md-auto font-weight-bold">Simple Blog</h5>
+      <% if user_signed_in? and current_user.admin%>
+        <span class="p-2 text-dark" href="#"><%= link_to 'Add new post', new_admin_post_path %></span>
+      <% end %>
       <span class="p-2 text-dark" href="#"><%= link_to 'Main Page', posts_path %></span>
-      <span class="p-2 text-dark" href="#"><%= link_to 'Add new post', new_post_path %></span>
       <span class="p-2 text-dark" href="#"><%= link_to 'About', about_path %></span>
       <nav class="my-2 my-md-0 mr-md-3">
         <% if user_signed_in? %>
@@ -32,7 +34,17 @@
     </div>
 
     <div class="container">
-
+      <div class="row">
+        <div class="col-md-12">
+          <% flash.each do |name, msg| %>
+            <div class="alert <%= bootstrap_class_for(name) %> alert-dismissible">
+              <!--              <button class="close" data-dismiss="alert">&times;</button>-->
+<!--              <a href="#" class="close" data-dismiss="alert">&times;</a>-->
+              <%= msg %>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </body>

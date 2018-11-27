@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   get 'about' => 'pages#about'
 
-  resources :posts do
+  resources :posts, only: [:index, :show] do
     resources :comments
+  end
+
+  namespace :admin do
+    resources :posts, except: [:index, :show]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
