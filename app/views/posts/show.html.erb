@@ -1,7 +1,7 @@
 <h1><%= @post.title %></h1>
 <%= image_tag  @post.image.url(:large), class: 'img-show' if @post.image? %>
 <p><%= @post.body.html_safe %></p>
-<% if user_signed_in? and current_user.admin%>
+<% if user_signed_in? and current_user.admin %>
   <hr>
   <%= link_to "Edit", edit_admin_post_path(@post), :class => 'btn btn-warning' %>
   <%= link_to "Delete", admin_post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, :class => 'btn btn-danger' %>
